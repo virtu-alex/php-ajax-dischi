@@ -1,0 +1,21 @@
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+body{
+    background-color: #1E2D3B
+}
+
+li{
+    color: white;
+    list-style: none;
+}
+
+ul{
+    padding: 0;
+}
+
+.card{
+    background-color:#3B3743;
+}

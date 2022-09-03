@@ -1,4 +1,4 @@
-<?php
+ <?php
 $discs = [
     [
         'title' => 'New Jersey',
@@ -72,44 +72,18 @@ $discs = [
     ],
 ];
 
-?>
+$results = $discs;
 
-<!DOCTYPE html>
-<html lang="en">
+$search = $_GET['$search'] ?? '';
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.css' integrity='sha512-h1rwF0uB6r2IuEZcyjPrR53bBKN9Wb4yL+w3Rdlzmc3CkBF1gMSFvQIIstnu4bEtYDaKca5ke5S8UBAACRImyg==' crossorigin='anonymous' />
-    <link rel="stylesheet" href="../dischi/css/style.css" type="text/css" />
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css' integrity='sha512-HHsOC+h3najWR7OKiGZtfhFIEzg5VRIPde0kB0bG2QRidTQqf+sbfcxCTB16AcFB93xMjnBIKE29/MjdzXE+qw==' crossorigin='anonymous' />
-</head>
 
-<body>
-    <header>
+if ($search) {
+    $results = [];
+    foreach ($discs as $disc) {
+        if (strpos($title, $searched_term) !== false) $results[] = $disc;
+    }
+}
 
-    </header>
-    <main>
-        <section class="container">
-            <?php if (count($discs) === 10) : ?>
-                <div class="row justify-content-center">
-                    <?php foreach ($discs as $disc) : ?>
-                        <div class="col-3 m-1 p-2 card">
-                            <img src="<?= $disc['poster'] ?>" alt="<?= $disc['title'] ?>">
-                            <div class="text-center text-white">
-                                <h3><?= $disc['title'] ?></h3>
-                                <p><?= $disc['author'] ?></p>
-                                <p><?= $disc['year'] ?></p>
-                            </div>
-                        </div>
-                    <? endforeach; ?>
-                </div>
-                </div>
-            <?php endif; ?>
-        </section>
-    </main>
-</body>
+header('Content-Type: application/json');
 
-</html>
+echo json_encode($results);
